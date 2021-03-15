@@ -33,10 +33,10 @@ export default function MediaCard(props) {
         <Typography gutterBottom variant="subtitle1" component="p">
           {name}
         </Typography>
-        <Typography gutterBottom variant="subtitle5" component="p">
+        <Typography gutterBottom variant="h2" component="p">
           {date}
         </Typography>
-        <Typography variant="subtitle5" color="textSecondary" component="p">
+        <Typography variant="h2" color="textSecondary" component="p">
           {time}
         </Typography>
 
