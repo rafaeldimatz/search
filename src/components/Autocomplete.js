@@ -119,7 +119,7 @@ export default function Autocomplete() {
             {load ? <CircularProgress /> : <div>
                 <div className="flex-search">
                     <div className="flex-itemsearch"><input className={classes.input} value={text} onChange={onTextChanged} type="text" placeholder="Search" /></div>
-                    <div className="flex-itemsearch" className={classes.button} ><Button size="small" fullWidth="true" onClick={() => handleClickSearch(searchWord)} variant="contained" >Search</Button>
+                    <div className="flex-itemsearch" className={classes.button} ><Button size="small" onClick={() => handleClickSearch(searchWord)} variant="contained" >Search</Button>
                     </div>
                 </div>
                 <div>
