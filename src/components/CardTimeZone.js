@@ -8,7 +8,8 @@ import CancelIcon from '@material-ui/icons/Cancel';
 const useStyles = makeStyles({
   root: {
     width: '100%',
-    height: '100%'
+    height: '100%',
+    background:'lightblue'
   },
   cancel: {
     textAlign: 'end'
@@ -24,7 +25,6 @@ export default function MediaCard(props) {
   const removeCountryId = (id) => {
     props.delete(id);
   }
-
   return (
     <Card className={classes.root}>
       <CardActionArea>
@@ -33,10 +33,10 @@ export default function MediaCard(props) {
         <Typography gutterBottom variant="subtitle1" component="p">
           {name}
         </Typography>
-        <Typography gutterBottom variant="h2" component="p">
+        <Typography gutterBottom variant="subtitle2" component="p">
           {date}
         </Typography>
-        <Typography variant="h2" color="textSecondary" component="p">
+        <Typography variant="subtitle2" color="textSecondary" component="p">
           {time}
         </Typography>
 
