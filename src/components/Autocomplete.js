@@ -51,7 +51,7 @@ export default function Autocomplete() {
                 setLoad(false);
             })
             .catch((err) => console.log('Error:' + err))
-    }, [descriptionCountries])
+    }, [])
 
     const handleClickSearch = (searchWord) => {
         setCard(true);
