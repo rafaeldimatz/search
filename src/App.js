@@ -3,9 +3,9 @@ import Autocomplete from './components/Autocomplete';
 
 function App() {
   return (
-      <div className="App">
-      <Autocomplete/>
-      </div>
+    <div className="App">
+      <Autocomplete />
+    </div>
   );
 }
 

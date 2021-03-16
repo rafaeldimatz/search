@@ -1,7 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CancelIcon from '@material-ui/icons/Cancel';
 
@@ -9,10 +10,11 @@ const useStyles = makeStyles({
   root: {
     width: '100%',
     height: '100%',
-    background:'lightblue'
+    background: '#bbe6f4',
+    borderRadius: '20px',
   },
   cancel: {
-    textAlign: 'end'
+    paddingLeft: '340px'
   }
 });
 
@@ -26,21 +28,22 @@ export default function MediaCard(props) {
     props.delete(id);
   }
   return (
-    <Card className={classes.root}>
-      <CardActionArea>
 
-        <div className={classes.cancel}><CancelIcon onClick={() => removeCountryId(props.id)} /></div>
-        <Typography gutterBottom variant="subtitle1" component="p">
+    <Card className={classes.root}>
+      <CardActions>
+        <CancelIcon onClick={() => removeCountryId(props.id)} className={classes.cancel} />
+      </CardActions>
+      <CardContent>
+        <Typography variant="h5" component="h2">
           {name}
         </Typography>
-        <Typography gutterBottom variant="subtitle2" component="p">
+        <Typography className={classes.pos} color="textSecondary">
           {date}
         </Typography>
-        <Typography variant="subtitle2" color="textSecondary" component="p">
+        <Typography variant="body2" component="p">
           {time}
         </Typography>
-
-      </CardActionArea>
+      </CardContent>
     </Card>
   );
 }

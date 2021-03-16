@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         border: '1px solid red'
     },
+
     input: {
         width: '95%',
         height: '40px',
@@ -27,7 +28,8 @@ const useStyles = makeStyles((theme) => ({
     },
     button: {
         alignSelf: 'center',
-        margin: '5px'
+        margin: '5px',
+        marginTop: '10px'
     },
 
 
@@ -40,6 +42,7 @@ export default function Autocomplete() {
     const [descriptionCountries, setDescriptionCountries] = useState([]);   //ESTE HOOK HAY QUE MODIFICAR DESDE CardTimeZone.js
     const [searchWord, setSearchWord] = useState('');
     const [card, setCard] = useState(false);
+    const [addCountry, setAddCountry] = useState(false)
     const [load, setLoad] = useState(true);
 
     useEffect(function () {
@@ -54,28 +57,22 @@ export default function Autocomplete() {
     }, [])
 
     const handleClickSearch = (searchWord) => {
-        setCard(true);
-
-        const country1 = [{ time: '21:25 PM', date: '19/03/2021', id: uuidv4(), name: 'Argentina' }]
-        const country2 = [{ time: '22:25 PM', date: '20/03/2021', id: uuidv4(), name: 'Francia' }]
-        const country3 = [{ time: '13:25 PM', date: '21/03/2021', id: uuidv4(), name: 'Alemania' }]
-        const country4 = [{ time: '8:25 AM', date: '22/03/2021', id: uuidv4(), name: 'España' }]
-        const country5 = [{ time: '22:50 PM', date: '23/03/2021', id: uuidv4(), name: 'Brasil' }]
-        setDescriptionCountries([...country1, ...country2, ...country3, ...country4, ...country5]);
+        if (addCountry) {
+            const country1 = [{ time: '21:25 PM', date: '19/03/2021', id: uuidv4(), name: searchWord }]
+            setCard(true);
+            setAddCountry(false);
+            setText("");
+            setDescriptionCountries([...descriptionCountries, ...country1]);
+        }
     }
 
     const onTextChanged = (event) => {
         const value = event.target.value;
-        setCard(false)
         setSearchWord(value)
-        setDescriptionCountries([]);
         let suggestionsAux = [];
         if (value.length > 0) {
-            setCard(false);
             const regex = new RegExp(`^${value}`, 'i');
             suggestionsAux = countries.sort().filter(v => regex.test(v));
-        } else {
-            setCard(true);
         }
         setSuggestions(suggestionsAux);
         setText(value);
@@ -83,6 +80,7 @@ export default function Autocomplete() {
 
     const suggestionSelected = (value) => {
         setText(value);
+        setAddCountry(true);
         setSearchWord(value);
         setSuggestions([]);
     }
@@ -92,11 +90,11 @@ export default function Autocomplete() {
             return null;
         }
         return (
-            <div className="srchList">
-                <ul>
-                    {suggestions.map((item) => <li key={uuidv4()} onClick={() => suggestionSelected(item)}>{item}</li>)}
-                </ul>
-            </div>
+
+            <ul>
+                {suggestions.map((item) => <li key={uuidv4()} onClick={() => suggestionSelected(item)}>{item}</li>)}
+            </ul>
+
         );
     }
 
@@ -119,20 +117,16 @@ export default function Autocomplete() {
             {load ? <CircularProgress /> : <div>
                 <div className="flex-search">
                     <div className="flex-itemsearch"><input className={classes.input} value={text} onChange={onTextChanged} type="text" placeholder="Search" /></div>
-                    <div className="flex-itemsearch" className={classes.button} ><Button size="small" onClick={() => handleClickSearch(searchWord)} variant="contained" >Search</Button>
+                    <div className="flex-itemsearch" className={classes.button} ><Button size="small" onClick={() => handleClickSearch(searchWord)} variant="contained" >Add</Button>
                     </div>
                 </div>
                 <div>
                     {renderSuggestions()}
                 </div>
-                {descriptionCountries.length > 0 ?
-
-                    <ul className="background:grey" className="flex-container">
-
+                {descriptionCountries.length > 0 &&
+                    <ul className="background:#a6dced" className="flex-container">
                         {itemsArray}
-
-                    </ul> : ""
-
+                    </ul>
                 }
             </div>}
         </div>

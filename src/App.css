@@ -1,9 +1,9 @@
 .App {
   text-align: center;
-  width: 50%;
+  width: 80%;
   margin-left: auto;
   margin-right: auto;
-  background:#80808033;
+  background:#85b0bd;
 }
 
 /*Para Las Listas de paises*/
@@ -11,21 +11,23 @@ ul {
   list-style-type:none;
   color: #363636;
   font-weight: bold;
-  background:#80808033;
+  background:#85b0bd;
 }
 
 .flex-container {
    display: flex;
+   justify-content:center;
    flex-flow: row wrap;
    padding: 0;
    margin: 0;
    list-style: none;
+   background:#a0cad8;
 }
 
 .flex-item {
   padding: 5px;
-  width: 250px;
-  height: 150px;
+  width: 390px;
+  height: 180px;
   margin-top: 10px;
   line-height: 150px;
   color: white;
@@ -50,3 +52,6 @@ ul {
    font-size: 3em;
    text-align: center;
  }
+
+
+ /*li { float: left; width: 30%; height: 50px; background:#a0cad8 }*/
