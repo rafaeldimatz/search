@@ -10,11 +10,11 @@ const useStyles = makeStyles({
   root: {
     width: '100%',
     height: '100%',
-    background: '#bbe6f4',
+    background: '#AED6F1',
     borderRadius: '20px',
   },
   cancel: {
-    paddingLeft: '340px'
+    paddingLeft: '90%'
   }
 });
 

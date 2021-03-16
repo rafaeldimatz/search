@@ -1,5 +1,4 @@
 import React, { useEffect, useState, createContext } from 'react';
-import Button from '@material-ui/core/Button';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import CardTimeZone from './CardTimeZone';
 import '../App.css';
@@ -25,14 +24,7 @@ const useStyles = makeStyles((theme) => ({
         paddingLeft: '15px',
         outline: 'none',
         margin: '10px'
-    },
-    button: {
-        alignSelf: 'center',
-        margin: '5px',
-        marginTop: '10px'
-    },
-
-
+    }
 }))
 export default function Autocomplete() {
     const classes = useStyles();
@@ -40,9 +32,7 @@ export default function Autocomplete() {
     const [suggestions, setSuggestions] = useState([]);
     const [text, setText] = useState('');
     const [descriptionCountries, setDescriptionCountries] = useState([]);   //ESTE HOOK HAY QUE MODIFICAR DESDE CardTimeZone.js
-    const [searchWord, setSearchWord] = useState('');
     const [card, setCard] = useState(false);
-    const [addCountry, setAddCountry] = useState(false)
     const [load, setLoad] = useState(true);
 
     useEffect(function () {
@@ -56,19 +46,8 @@ export default function Autocomplete() {
             .catch((err) => console.log('Error:' + err))
     }, [])
 
-    const handleClickSearch = (searchWord) => {
-        if (addCountry) {
-            const country1 = [{ time: '21:25 PM', date: '19/03/2021', id: uuidv4(), name: searchWord }]
-            setCard(true);
-            setAddCountry(false);
-            setText("");
-            setDescriptionCountries([...descriptionCountries, ...country1]);
-        }
-    }
-
     const onTextChanged = (event) => {
         const value = event.target.value;
-        setSearchWord(value)
         let suggestionsAux = [];
         if (value.length > 0) {
             const regex = new RegExp(`^${value}`, 'i');
@@ -80,9 +59,11 @@ export default function Autocomplete() {
 
     const suggestionSelected = (value) => {
         setText(value);
-        setAddCountry(true);
-        setSearchWord(value);
         setSuggestions([]);
+        const country1 = [{ time: '21:25 PM', date: '19/03/2021', id: uuidv4(), name: value }]
+        setCard(true);
+        setText("");
+        setDescriptionCountries([...descriptionCountries, ...country1]);
     }
 
     const renderSuggestions = () => {
@@ -90,11 +71,9 @@ export default function Autocomplete() {
             return null;
         }
         return (
-
             <ul>
                 {suggestions.map((item) => <li key={uuidv4()} onClick={() => suggestionSelected(item)}>{item}</li>)}
             </ul>
-
         );
     }
 
@@ -103,11 +82,10 @@ export default function Autocomplete() {
         setDescriptionCountries(newArrayCountries);
     }
 
-
     var itemsArray = [];
     if (card) {
         descriptionCountries.map((country) => {
-            itemsArray.push(<li className="flex-item" key={country.id} >
+            itemsArray.push(<li className="grid-item" key={country.id} >
                 <CardTimeZone time={country.time} date={country.date} id={country.id} name={country.name} delete={removeCountry} /></li>)
         })
     }
@@ -115,21 +93,18 @@ export default function Autocomplete() {
 
         <div>
             {load ? <CircularProgress /> : <div>
-                <div className="flex-search">
-                    <div className="flex-itemsearch"><input className={classes.input} value={text} onChange={onTextChanged} type="text" placeholder="Search" /></div>
-                    <div className="flex-itemsearch" className={classes.button} ><Button size="small" onClick={() => handleClickSearch(searchWord)} variant="contained" >Add</Button>
-                    </div>
+                <div className="grid-header-search">
+                    <div className="grid-item-search" ><input className={classes.input} value={text} onChange={onTextChanged} type="text" placeholder="Search" /></div>
                 </div>
                 <div>
                     {renderSuggestions()}
                 </div>
                 {descriptionCountries.length > 0 &&
-                    <ul className="background:#a6dced" className="flex-container">
+                    <ul className="background:#a6dced" className="grid-card">
                         {itemsArray}
                     </ul>
                 }
             </div>}
         </div>
-
     );
 }

@@ -3,7 +3,7 @@
   width: 80%;
   margin-left: auto;
   margin-right: auto;
-  background:#85b0bd;
+  background:#3498DB ;
 }
 
 /*Para Las Listas de paises*/
@@ -11,47 +11,38 @@ ul {
   list-style-type:none;
   color: #363636;
   font-weight: bold;
-  background:#85b0bd;
+  background:#3498DB ;
+  align-items: center;
 }
 
-.flex-container {
-   display: flex;
-   justify-content:center;
-   flex-flow: row wrap;
-   padding: 0;
-   margin: 0;
-   list-style: none;
-   background:#a0cad8;
+@media (min-width:900px){
+.grid-card{
+  grid-template-columns: repeat(3,2fr)
+}
 }
 
-.flex-item {
-  padding: 5px;
-  width: 390px;
-  height: 180px;
-  margin-top: 10px;
-  line-height: 150px;
-  color: white;
-  font-weight: bold;
-  font-size: 3em;
+.grid-card {
+  display: grid;
+  background-color: #85C1E9 ;
+  padding: 10px;
+  margin: 0 auto;
+}
+.grid-item {
+  padding: 10px;
+  font-size: 30px;
   text-align: center;
+  
 }
 
-.flex-search {
-  display: flex;
-  flex-flow: row wrap;
-  padding: 0;
-  margin: 0;
-  list-style: none;
+.grid-header-search{
+  display: grid;
+  grid-template-columns: auto;
+  background-color: #3498DB ;
+  padding: 10px;
 }
-
-.flex-itemsearch {
-   width: 80%;
-   padding: 5px;  
-   color: white;
-   font-weight: bold;
-   font-size: 3em;
-   text-align: center;
- }
-
-
- /*li { float: left; width: 30%; height: 50px; background:#a0cad8 }*/
+.grid-item-search {
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+  width: 80%;
+}
